@@ -1,0 +1,23 @@
+
+Memasukan data table child
+INSERT INTO public.child(
+	id, name, parent_id)
+	VALUES (1, 'Zaki', 2),(2, 'Ilham', null),(3, 'Irwan', 2),(4, 'Arka', 3);
+
+Memasukan data table parent
+INSERT INTO public.parent(
+	parent_id, parent_name)
+	VALUES (1, 'Zaki'),(2,'Ilham'),(3,'Irwan'),(4,'Arka');
+
+Membuat foreign key pada parent_id table child dengan id table parent
+alter table child
+add constraint parent_id
+foreign key (id)
+references parent (id) on delete cascade on update cascade
+
+
+Menampilkan table child dan parent dengan id parent
+select c.id, c.name, p.id as parent_id from child c left join parent p on c.parent_id = p.id;
+
+Menampilkan table child dan parent dengan nama parent
+select c.id, c.name, p.name as parent_name from child c left join parent p on c.parent_id = p.id;
